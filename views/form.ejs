@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AFI | Change Password</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background-image: url('https://ec-cstatic.akulaku.net/web-site/_nuxt/img/pc_banner.a31a5bd.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-size: 12px;
+      height: 100vh;
+    }
+    .login-wrapper {
+      background-color: rgba(255, 255, 255, 0.92);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .form-control {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 11px;
+      padding: 6px 10px;
+    }
+    .btn {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 11px;
+      padding: 6px 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container d-flex justify-content-center align-items-center h-100">
+    <div class="col-md-5 login-wrapper">
+      <h4 class="text-center mb-4">Change Password</h4>
+
+      <% if (message) { %>
+        <div class="alert <%= message.includes('berhasil') ? 'alert-success' : 'alert-danger' %> py-1 px-2">
+          <%= message %>
+        </div>
+      <% } %>
+
+      <form method="POST" action="/update" onsubmit="showSpinner()">
+        <div class="form-group mb-2">
+          <label for="email">Select User:</label>
+          <select name="email" id="email" class="form-control" required>
+            <option value="" disabled selected>Pilih user...</option>
+            <% users.forEach(user => { %>
+              <option value="<%= user.email %>"><%= user.name %> (<%= user.email %>)</option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="oldPassword">Password Lama:</label>
+          <input type="password" name="oldPassword" id="oldPassword" class="form-control" required/>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="newPassword">Password Baru:</label>
+          <input type="password" name="newPassword" id="newPassword" class="form-control" required/>
+        </div>
+
+        <!-- Tombol sejajar kiri-kanan -->
+<div class="d-flex justify-content-between">
+  <button type="submit" class="btn btn-primary w-45" name="action" value="update">Update Password</button>
+  <button type="button" class="btn btn-primary w-45" onclick="window.location.href='https://form-productivity-collection.vercel.app/login'">Login</button>
+</div>
+
+      </form>
+
+      <div id="loadingSpinner" class="text-center mt-3" style="display: none;">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p class="mt-2 text-muted">Mohon tunggu, sedang memproses...</p>
+      </div>
+
+      <div class="text-center mt-3">
+        <small class="text-muted">© <%= new Date().getFullYear() %> AFI Internal Collection</small>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showSpinner() {
+      document.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = true);
+      document.getElementById('loadingSpinner').style.display = 'block';
+    }
+  </script>
+
+  <style>
+    /* Membuat dua tombol sama lebar */
+    .w-45 {
+      width: 48%; /* ada sedikit spasi di antaranya */
+    }
+  </style>
+</body>
+</html>

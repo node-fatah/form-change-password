@@ -1,0 +1,29 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs
+*.log
+*.log.*
+
+# Env files
+.env
+*.env
+
+# Google credentials
+credentials.json
+
+# Mac / Windows system files
+.DS_Store
+Thumbs.db
+
+# Vercel build output
+.vercel
+
+# Local build / cache
+dist/
+build/
+.cache/
