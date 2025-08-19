@@ -57,15 +57,34 @@
           </select>
         </div>
 
-        <div class="form-group mb-3">
-          <label for="oldPassword">Password Lama:</label>
-          <input type="password" name="oldPassword" id="oldPassword" class="form-control" required/>
-        </div>
+<div class="form-group mb-3">
+  <label for="oldPassword">Password Lama:</label>
+  <div style="position: relative;">
+    <input type="password" name="oldPassword" id="oldPassword"
+           class="form-control"
+           placeholder="Masukkan password lama" required
+           style="padding-right: 40px;">
+    <span id="toggleOldPassword" 
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #6c757d;">
+      <i class="bi bi-eye"></i>
+    </span>
+  </div>
+</div>
 
-        <div class="form-group mb-3">
-          <label for="newPassword">Password Baru:</label>
-          <input type="password" name="newPassword" id="newPassword" class="form-control" required/>
-        </div>
+<div class="form-group mb-3">
+  <label for="newPassword">Password Baru:</label>
+  <div style="position: relative;">
+    <input type="password" name="newPassword" id="newPassword"
+           class="form-control"
+           placeholder="Masukkan password baru" required
+           style="padding-right: 40px;">
+    <span id="toggleNewPassword" 
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #6c757d;">
+      <i class="bi bi-eye"></i>
+    </span>
+  </div>
+</div>
+
 
         <!-- Tombol sejajar kiri-kanan -->
 <div class="d-flex justify-content-between">
@@ -92,6 +111,33 @@
       document.getElementById('loadingSpinner').style.display = 'block';
     }
   </script>
+
+<script>
+  function togglePassword(inputId, toggleId) {
+    const input = document.getElementById(inputId);
+    const toggle = document.getElementById(toggleId).querySelector("i");
+
+    if (input.type === "password") {
+      input.type = "text";
+      toggle.classList.remove("bi-eye");
+      toggle.classList.add("bi-eye-slash");
+    } else {
+      input.type = "password";
+      toggle.classList.remove("bi-eye-slash");
+      toggle.classList.add("bi-eye");
+    }
+  }
+
+  document.getElementById("toggleOldPassword").addEventListener("click", () => {
+    togglePassword("oldPassword", "toggleOldPassword");
+  });
+
+  document.getElementById("toggleNewPassword").addEventListener("click", () => {
+    togglePassword("newPassword", "toggleNewPassword");
+  });
+</script>
+
+
 
   <style>
     /* Membuat dua tombol sama lebar */
